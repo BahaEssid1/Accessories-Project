@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Add dark mode customizations here if necessary */
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Custom Swiper Navigation Arrows */
+.swiper-button-prev.custom-arrow,
+.swiper-button-next.custom-arrow {
+  background-color: #ffffff; /* White background */
+  border-radius: 50%; /* Rounded */
+  width: 30px; /* Button width */
+  height: 30px; /* Button height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black; /* Arrow color */
+  font-size: 18px; /* Adjust icon size */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  position: absolute; /* Absolute positioning */
+  top: 40%; /* Move the arrows slightly upwards */
+  transform: translateY(-50%); /* Vertically center them */
+}
+
+/* Adjust the arrow icon size inside the button */
+.swiper-button-prev.custom-arrow:after,
+.swiper-button-next.custom-arrow:after {
+  font-size: 12px; /* Make the icon smaller */
+  color: black; /* Default color of the arrow */
+  transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+/* Hover effect */
+.swiper-button-prev.custom-arrow:hover,
+.swiper-button-next.custom-arrow:hover {
+  background-color: #f97316; /* Orange on hover */
+}
+
+/* Change the arrow color to white on hover */
+.swiper-button-prev.custom-arrow:hover:after,
+.swiper-button-next.custom-arrow:hover:after {
+  color: white; /* Arrow color turns white on hover */
+}
+
+/* Position the previous arrow on the left */
+.swiper-button-prev.custom-arrow {
+  left: 10px; /* Adjust left position */
+}
+
+/* Position the next arrow on the right */
+.swiper-button-next.custom-arrow {
+  right: 10px; /* Adjust right position */
+}
