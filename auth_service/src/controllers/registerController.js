@@ -1,24 +1,24 @@
-// const User = require('../models/user');
-// const { validationResult } = require('express-validator');
-// exports.register = async (req, res) => {
-//     try {
-//         // Vérifier les erreurs de validation
-//         const errors = validationResult(req);
-//         if (!errors.isEmpty()) {
-//             return res.status(400).json({ errors: errors.array() });
-//         }
+const User = require('../models/user');
+const { validationResult } = require('express-validator');
+exports.register = async (req, res) => {
+    try {
+        // Vérifier les erreurs de validation
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
 
-//         const { username, email, phone, password } = req.body;
+        const { username, email, phone, password } = req.body;
 
-//         // Créer un nouvel utilisateur
-//         const user = new User({ username, email, phone, password });
-//         await user.save();
+        // Créer un nouvel utilisateur
+        const user = new User({ username, email, phone, password });
+        await user.save();
 
-//         res.status(201).json({ message: 'User registered successfully', user });
-//     } catch (err) {
-//         res.status(500).json({ error: err.message });
-//     }
-// };
+        res.status(201).json({ message: 'User registered successfully', user });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
 
 
 // const User = require("../models/user");
@@ -116,26 +116,26 @@
 
 
 
-const bcrypt = require('bcrypt');
-const User = require('../models/user');
+// const bcrypt = require('bcrypt');
+// const User = require('../models/user');
 
-async function registerUser(req, res) {
-  const { username, email, phone, password } = req.body;
+// async function registerUser(req, res) {
+//   const { username, email, phone, password } = req.body;
 
-  // Hash the password before saving to the database
-  try {
-    const hashedPassword = await bcrypt.hash(password, 10);
+//   // Hash the password before saving to the database
+//   try {
+//     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = new User({
-      username,
-      email,
-      phone,
-      password: hashedPassword, // Store the hashed password
-    });
+//     const newUser = new User({
+//       username,
+//       email,
+//       phone,
+//       password: hashedPassword, // Store the hashed password
+//     });
 
-    await newUser.save();
-    res.status(201).send({ message: "User registered successfully!" });
-  } catch (error) {
-    res.status(500).send({ message: "Error registering user" });
-  }
-}
+//     await newUser.save();
+//     res.status(201).send({ message: "User registered successfully!" });
+//   } catch (error) {
+//     res.status(500).send({ message: "Error registering user" });
+//   }
+// }

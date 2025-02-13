@@ -1,0 +1,14 @@
+2025/02/12 16:14:35 [emerg] 23428#21480: "server" directive is not allowed here in C:\Users\zeine\OneDrive\Desktop\project\nginx/conf/nginx.conf:1
+2025/02/12 16:16:19 [emerg] 10372#20800: "server" directive is not allowed here in C:\Users\zeine\OneDrive\Desktop\project\nginx/conf/nginx.conf:1
+2025/02/12 16:20:02 [notice] 2184#11212: signal process started
+2025/02/12 16:20:02 [error] 2184#11212: OpenEvent("Global\ngx_reload_11512") failed (2: The system cannot find the file specified)
+2025/02/12 16:20:20 [notice] 22196#2812: signal process started
+2025/02/12 16:20:20 [error] 22196#2812: OpenEvent("Global\ngx_stop_11512") failed (2: The system cannot find the file specified)
+2025/02/12 16:21:55 [notice] 25288#22176: signal process started
+2025/02/12 17:38:45 [notice] 1932#18416: signal process started
+2025/02/12 17:46:15 [notice] 16656#20836: signal process started
+2025/02/12 17:58:03 [notice] 27524#5020: signal process started
+2025/02/12 17:58:15 [notice] 26760#11232: signal process started
+2025/02/12 17:58:15 [error] 26760#11232: CreateFile() "C:\Users\zeine\OneDrive\Desktop\project\nginx/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2025/02/12 18:03:38 [notice] 17992#9700: signal process started
+2025/02/12 18:08:00 [notice] 25668#4412: signal process started

@@ -2,6 +2,7 @@ package handlers
 
 import (
 	//"fmt"
+	"strconv" // i added this
 	"log"
 	"github.com/gofiber/fiber/v2"
 	"catalog-service/database"
@@ -147,11 +148,61 @@ func GetCategoryByID(c *fiber.Ctx) error {
 }
 
 
-//GetProductsByCategory
+// //GetProductsByCategory
+// func GetProductsByCategory(c *fiber.Ctx) error {
+// 	categoryID := c.Params("id")
+// 	if categoryID == "" {
+// 		return c.Status(400).JSON(fiber.Map{"error": "Category ID is required"})
+// 	}
+
+// 	query := `
+// 		SELECT id, title, description, price, available, photos
+// 		FROM products
+// 		WHERE category_id = $1
+// 	`
+// 	rows, err := database.DB.Query(query, categoryID)
+// 	if err != nil {
+// 		log.Println("Database error:", err)
+// 		return c.Status(500).JSON(fiber.Map{"error": "Failed to fetch products"})
+// 	}
+// 	defer rows.Close()
+
+// 	var products []fiber.Map
+// 	for rows.Next() {
+// 		var id int
+// 		var title, description, photos string
+// 		var price float64
+// 		var available bool
+
+// 		err := rows.Scan(&id, &title, &description, &price, &available, &photos)
+// 		if err != nil {
+// 			log.Println("Error scanning product row:", err)
+// 			return c.Status(500).JSON(fiber.Map{"error": "Failed to parse products"})
+// 		}
+
+// 		products = append(products, fiber.Map{
+// 			"id":          id,
+// 			"title":       title,
+// 			"description": description,
+// 			"price":       price,
+// 			"available":   available,
+// 			"photos":      photos,
+// 		})
+// 	}
+
+// 	return c.Status(200).JSON(products)
+// }
+// GetProductsByCategory fetches products by category ID
 func GetProductsByCategory(c *fiber.Ctx) error {
 	categoryID := c.Params("id")
 	if categoryID == "" {
 		return c.Status(400).JSON(fiber.Map{"error": "Category ID is required"})
+	}
+
+	// Optional: Validate categoryID is numeric if it should be an integer
+	categoryIDInt, err := strconv.Atoi(categoryID)
+	if err != nil {
+		return c.Status(400).JSON(fiber.Map{"error": "Invalid Category ID"})
 	}
 
 	query := `
@@ -159,7 +210,8 @@ func GetProductsByCategory(c *fiber.Ctx) error {
 		FROM products
 		WHERE category_id = $1
 	`
-	rows, err := database.DB.Query(query, categoryID)
+
+	rows, err := database.DB.Query(query, categoryIDInt)
 	if err != nil {
 		log.Println("Database error:", err)
 		return c.Status(500).JSON(fiber.Map{"error": "Failed to fetch products"})
@@ -187,6 +239,11 @@ func GetProductsByCategory(c *fiber.Ctx) error {
 			"available":   available,
 			"photos":      photos,
 		})
+	}
+
+	// Check if products exist
+	if len(products) == 0 {
+		return c.Status(404).JSON(fiber.Map{"error": "No products found for this category"})
 	}
 
 	return c.Status(200).JSON(products)

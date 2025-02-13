@@ -41,7 +41,7 @@ const User = require("../models/user"); // Assuming your User model is at this l
 const router = express.Router();
 
 router.post(
-  "/",
+  "/register",
   [
     body("username").notEmpty().withMessage("Username is required"),
     body("email").isEmail().withMessage("Invalid email format"),
